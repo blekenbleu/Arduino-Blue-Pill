@@ -1,5 +1,6 @@
 ## Arduino (*mostly*) Blue Pill sketches
-
+This is the default folder for STM32 Arduino 1.18.13;  
+a [portable](https://docs.arduino.cc/software/ide-v1/tutorials/PortableIDE) Arduino 1.18.16 installation handles ESP32.  
 ### here
 - [BeltTensionner](BeltTensionner/) was @Wotever's original SimHUb plugin sketch
 - [Blue_Blink](Blue_Blink/) is trivial LED blink sketch for STM32 Blue Pill

@@ -4,19 +4,19 @@ a separate [*portable*](https://docs.arduino.cc/software/ide-v1/tutorials/Portab
 This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.1.0`
 ### here
 - [**many in libraries/**](libraries/)
+- [**STM32Examples**](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
 - [BeltTensionner](BeltTensionner/) was @Wotever's original SimHUb plugin sketch
 - [Blue_Blink](Blue_Blink/) is trivial LED blink sketch for STM32 Blue Pill
 - [Board_Identify](Board_Identify/) Identify microcontroller for which code is built
 - [Chip_ID](Chip_ID/) [Wemos-D1-ESP8266 ESP.getChipId()](https://www.wemos.cc/verify_products)
 - [Joystick](Joystick/) axes and buttons over serial ibus
 - [new2char](new2char/) 7-bit, first with sync msb;  12 available bits: 5 address + 7 data
+- [Nothing-in-one_setPWM](Nothing-in-one_setPWM/) *6 Mar 2023*  **Useless** STM32Examples sketch:&nbsp; enabling PWM disables serial
+- [PWM_FullConfiguration](PWM_FullConfiguration) from [`STM32Examples/examples/Peripherals/HardwareTimer`](STM32Examples/examples/Peripherals/HardwareTimer/)  
 - [SerialEcho](SerialEcho/) ESP8266 D1 UNO R1 
 - [ServoBeltTensioner](ServoBeltTensioner/) *5 Jul 2021* hacked from @Wotever's BeltTensionner
 - [USBcomposite](USBcomposite/) library for Roger Melbourne\'s STM32F1  
 - [WiFi_blink](WiFi_blink/) *10 Jun 2021* based on *now-lost* tutorial
-- [Nothing-in-one_setPWM](Nothing-in-one_setPWM/) *6 Mar 2023*  **Useless** STM32Examples sketch:&nbsp; enabling PWM disables serial
-- [STM32Examples](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
-- [PWM_FullConfiguration](PWM_FullConfiguration) from [`STM32Examples/examples/Peripherals/HardwareTimer`](STM32Examples/examples/Peripherals/HardwareTimer/)  
 
 ### [elsewhere](https://blekenbleu.github.io/Arduino)
 - [blek2char](https://blekenbleu.github.io/Arduino/) *15 Jan 2022 update* by @sierses: real Arduino support

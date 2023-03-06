@@ -8,9 +8,9 @@
 
 
 /* Uncomment one microprocessor */
-//#define BLUEPILL 1
+#define BLUEPILL 1
 //#define BLACKPILL 1
-#define UNO 1 // Arduino Uno, Nano
+//#define UNO 1 // Arduino Uno, Nano
 //#define LEONARDO 1 // Arduino Leonardo, Micro
 //#define PROMICRO 1 // Sparkfun ProMicro
 //#define MEGA 1 // Arduino Mega 2560

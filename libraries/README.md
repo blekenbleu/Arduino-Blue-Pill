@@ -5,10 +5,9 @@ For information on installing libraries, see: http://www.arduino.cc/en/Guide/Lib
 - [Arduino_CRC32](Arduino_CRC32/)
 - [Arduino_DebugUtils](Arduino_DebugUtils/)
 - [Board_Identify](Board_Identify/)
-- [STM32Examples](STM32Examples-main/)
-- [STM32_PWM](STM32_PWM/)
 - [Servo](Servo/)
 - [SimpleTimer](SimpleTimer-master/)
+- [STM32_PWM](STM32_PWM/)
 
 STM officially supports [STM32duino](https://github.com/stm32duino) with [core support](https://github.com/stm32duino/Arduino_Core_STM32)
 and [**examples**](STM32Examples-main),  

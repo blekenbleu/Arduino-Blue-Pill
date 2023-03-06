@@ -14,6 +14,9 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [ServoBeltTensioner](ServoBeltTensioner/) *5 Jul 2021* hacked from @Wotever's BeltTensionner
 - [USBcomposite](USBcomposite/) library for Roger Melbourne\'s STM32F1  
 - [WiFi_blink](WiFi_blink/) *10 Jun 2021* based on *now-lost* tutorial
+- [Nothing-in-one_setPWM](Nothing-in-one_setPWM/) *6 Mar 2023*  **Useless** STM32Examples sketch:&nbsp; enabling PWM disables serial
+- [STM32Examples](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
+- [PWM_FullConfiguration](PWM_FullConfiguration) from [`STM32Examples/examples/Peripherals/HardwareTimer`](STM32Examples/examples/Peripherals/HardwareTimer/)  
 
 ### [elsewhere](https://blekenbleu.github.io/Arduino)
 - [blek2char](https://blekenbleu.github.io/Arduino/) *15 Jan 2022 update* by @sierses: real Arduino support

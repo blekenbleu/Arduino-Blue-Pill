@@ -59,7 +59,7 @@ void setup()
   MyTim->attachInterrupt(Update_IT_callback);
   MyTim->attachInterrupt(channel, Compare_IT_callback);
   MyTim->resume();
-  Serial.write("leaving setup()... Prescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
+  Serial.write("\nleaving setup()... Prescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
 }
 
 /*

@@ -21,14 +21,16 @@
 
 void Update_IT_callback(void)	// Update event at PWM rising edge in PWM1 mode
 {
-  digitalWrite(pin2, LOW);		// pin2 will be complementary to pin
+  digitalWrite(pin2, HIGH);
 }
 
 void Compare_IT_callback(void)	// Compare match event corresponds to PWM falling edge in PWM1 mode
 {
-  digitalWrite(pin2, HIGH);
+  digitalWrite(pin2, LOW);		// pin2 will approximate PWM pin
 }
 
+HardwareTimer *MyTim;
+uint32_t channel;
 void setup()
 {
   // Configure pin2;  it is not controlled by HardwareTimer
@@ -43,12 +45,12 @@ void setup()
   // Automatically retrieve TIM instance and channel associated to pin
   // This is used for compatibility with all STM32 series.
   TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(pin), PinMap_PWM);
-  uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(pin), PinMap_PWM));
+  channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(pin), PinMap_PWM));
 
   Serial.write("channel "); Serial.print(channel); Serial.write(" for pin "); Serial.println(pin); // 'channel 31 for pin 17'
 
   // Instantiate HardwareTimer object;  'new' HardwareTimer is not destroyed when setup() ends.
-  HardwareTimer *MyTim = new HardwareTimer(Instance);
+  MyTim = new HardwareTimer(Instance);
   MyTim->setMode(channel, TIMER_OUTPUT_COMPARE_PWM1, pin);
   Serial.write("new HardwareTimer() TIMER_OUTPUT_COMPARE_PWM1 mode set");
 
@@ -62,6 +64,12 @@ void setup()
   Serial.write("\nleaving setup()... Prescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
 }
 
+void Reset()
+{
+	MyTim->setCaptureCompare(channel, 0, PERCENT_COMPARE_FORMAT);
+	delay(1);
+}
+
 /*
  ; 
  ; 1 == msb: command; 2 bytes for 110x and 100x
@@ -71,7 +79,82 @@ void setup()
  ; 101x == 3 msb: 31 commands with second byte as 7-bit count of following 7-bit values.
  ; 1011 1111: reset in 1 byte
  */
+byte state[2] = {0,0}, once = 0, command[3] = {0,0,0};
 void loop()
 {
 	// need to receive 1 to 40,000 to set 20kHz to 50Hz: 16 bits in 3 bytes: 111000bb 0bbbbbbb 0bbbbbbb
+	byte received;
+
+	if (0 < Serial.available()) {
+		received = Serial.read();
+		if (0xBF == received) {
+			Reset();
+			return;
+		}
+		else if (0 == state[0] || 0x80 & received) {	// not processing a command or start of one?
+			command[0] = received;
+			switch (0xE0 & command[0]) {
+				case 0xE0:		// 16-bits 3-bytes, e.g. PWM period
+					state[0] = 4;
+					break;
+				case 0xC0:		// 12-bits 2-bytes
+					state[0] = 3;
+					break;
+				case 0xA0:		// 7-bit count 3-129 bytes
+					state[0] = 2;
+					break;
+				case 0x80:		// 7-bits 2-bytes
+					state[0] = 1;
+					break;
+				default:
+					Serial.write("expecting a command byte; ignoring received: "); Serial.println(received);
+				break;
+			}
+		}
+		else if (2 != state[0]) {
+			byte limit = (4 == state[0]) ? 3 : 2;
+     unsigned int value;
+     
+			if (state[1] < limit) {
+				command[state[1]] = received;
+				state[1]++;
+			}
+			else {
+				Serial.write("too many bytes for command "); Serial.print(0xE0 & command[0]);
+				Serial.write("; ignoring received = "); Serial.println(received);
+                state[0] = state[1] = 0;
+				return;
+			}
+			if (state[1] < limit)
+				return;				// need another byte
+			switch (state[0]) {
+			case 1:					// PWM percent
+				MyTim->setCaptureCompare(channel, command[2], PERCENT_COMPARE_FORMAT);
+				break;
+			case 3:
+				break;
+			case 4:				// 3-byte 16-bit command: set PWM period
+				value = 3 & command[0];
+				value <<=7;
+				value |= command[1];
+				value <<=7;
+				value |= command[2];
+				if (0 < value)
+					MyTim->setOverflow(31 * value, MICROSEC_FORMAT);
+				else Serial.write("setOverflow(0) disallowed\n");
+				break;
+			default:
+				Serial.write("Unknown state: "); Serial.print(state[0]); Serial.write("; ignoring received = ");
+				Serial.println(received);
+				break;
+			}
+			state[0] = state[1] = 0;
+		}
+		else {	// deal with long commands
+			if (once)
+				return;
+			Serial.write("long commands not yet implemented\n");
+			once++;
+		}
+	}
 }

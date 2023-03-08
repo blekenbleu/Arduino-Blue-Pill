@@ -3,7 +3,7 @@
 
 [Stuyo's sim belt servo tensioner](https://diy-sim.com/guides/how-tos/servo-belt-tensioner-diy) is based on this Arduino sketch.  
 
-It requires a *compatible* SimHub Custom Serial profile (see [**Update**](#update) below),  
+It requires a *compatible* [SimHub Custom Serial profile](https://blekenbleu.github.io/Arduino/SimHubCustomSerial) (see [**Update**](#update) below),  
 or e.g. from [SimHub Custom serial profile atlas](https://blekenbleu.github.io/Arduino/shsds.htm),  
 as discussed in [SimHub Custom serial device for Blue Pill](https://blekenbleu.github.io/Arduino/SimHubCustomSerial).  
 

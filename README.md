@@ -6,7 +6,14 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [**many in libraries/**](libraries/)
 - [**STM32Examples**](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
 - [BeltTensionner](BeltTensionner/) was @Wotever's original SimHUb plugin sketch
-- [Blue_Blink](Blue_Blink/) is trivial LED blink sketch for STM32 Blue Pill
+- [blek2char](blek2char/) *15 Jan 2022 update* by @sierses: real Arduino support
+- [Blue2charServo](Blue2charServo/) multi-character control for SimHub Custom serial devices
+- [BlueLUT_Servo](BlueLUT_Servo/) index servo[] based on 3 bits of ASCII values, with 4 lsb to index LUT
+- [BluePWMfan](BluePWMfan/) index fan[] based on 3 bits of ASCII values, with 4 lsb to set PWM duty cycle
+- [Blue_ASCII](Blue_ASCII/) sketch for STM32 Blue Pill echoes received characters with hex option.
+- [Blue_ASCII_Servo](Blue_ASCII_Servo/) sketch for STM32 Blue Pill moves hobby servos based on received ASCII.
+- [Blue_Blink](Blue_Blink/) is a trivial LED blink sketch for STM32 Blue Pill
+- [Blue_Servo](Blue_Servo/) is a trivial hobby servo sketch for STM32 Blue Pill
 - [Board_Identify](Board_Identify/) Identify microcontroller for which code is built
 - [Chip_ID](Chip_ID/) [Wemos-D1-ESP8266 ESP.getChipId()](https://www.wemos.cc/verify_products)
 - [Joystick](Joystick/) axes and buttons over serial ibus
@@ -14,15 +21,8 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [PWM_FullConfiguration](PWM_FullConfiguration) from [`STM32Examples/examples/Peripherals/HardwareTimer`](STM32Examples/examples/Peripherals/HardwareTimer/)  
 - [SerialEcho](SerialEcho/) ESP8266 D1 UNO R1 
 - [ServoBeltTensioner](ServoBeltTensioner/) *5 Jul 2021* hacked from @Wotever's BeltTensionner
+- [SimHubPWMfans](SimHubPWMfans/) index fan[] pair based on lsb of ASCII values, with 6 msb to set PWM duty cycle
 - [USBcomposite](USBcomposite/) library for Roger Melbourne\'s STM32F1  
 - [WiFi_blink](WiFi_blink/) *10 Jun 2021* based on *now-lost* tutorial
 
-### [elsewhere](https://blekenbleu.github.io/Arduino)
-- [blek2char](https://blekenbleu.github.io/Arduino/) *15 Jan 2022 update* by @sierses: real Arduino support
-- [Blue2charServo](https://blekenbleu.github.io/Arduino/) multi-character control for SimHub Custom serial devices
-- [BlueLUT_Servo](https://blekenbleu.github.io/Arduino/) index servo[] based on 3 bits of ASCII values, with 4 lsb to index LUT
-- [BluePWMfan](https://blekenbleu.github.io/Arduino/SimHubPWMfans) index fan[] based on 3 bits of ASCII values, with 4 lsb to set PWM duty cycle
-- [Blue_ASCII sketch](https://blekenbleu.github.io/Arduino/) for STM32 Blue Pill echoes received characters with hex option.
-- [Blue_ASCII_Servo](https://blekenbleu.github.io/Arduino/) sketch for STM32 Blue Pill moves hobby servos based on received ASCII.
-- [Blue_Servo](https://blekenbleu.github.io/Arduino/) is trivial hobby servo sketch for STM32 Blue Pill
-- [SimHubPWMfans](https://blekenbleu.github.io/Arduino/SimHubPWMfans) index fan[] pair based on lsb of ASCII values, with 6 msb to set PWM duty cycle
+### [discussion](https://blekenbleu.github.io/Arduino)

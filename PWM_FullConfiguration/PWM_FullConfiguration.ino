@@ -73,10 +73,10 @@ void Reset()
 /*
  ; 
  ; 1 == msb: command; 2 bytes for 110x and 100x
- ; 110x == 3 msb: 1 command with 12-bit value in 2 bytes
  ; 100x == 3 msb: 32 commands with 7 bits in second byte as value
- ; 111x == 3 msb: 8 commands with 7 bits from second and third byte as 16-bit value  
  ; 101x == 3 msb: 31 commands with second byte as 7-bit count of following 7-bit values.
+ ; 110x == 3 msb: 1 command with 12-bit value in 2 bytes
+ ; 111x == 3 msb: 8 commands with 7 bits from second and third byte as 16-bit value  
  ; 1011 1111: reset in 1 byte
  */
 byte state[2] = {0,0}, once = 0, command[3] = {0,0,0};
@@ -89,31 +89,20 @@ void loop()
 		received = Serial.read();
 		if (0xBF == received) {
 			Reset();
+			state[0] = state[1] = 0;
 			return;
 		}
 		else if (0 == state[0] || 0x80 & received) {	// not processing a command or start of one?
 			command[0] = received;
-			switch (0xE0 & command[0]) {
-				case 0xE0:		// 16-bits 3-bytes, e.g. PWM period
-					state[0] = 4;
-					break;
-				case 0xC0:		// 12-bits 2-bytes
-					state[0] = 3;
-					break;
-				case 0xA0:		// 7-bit count 3-129 bytes
-					state[0] = 2;
-					break;
-				case 0x80:		// 7-bits 2-bytes
-					state[0] = 1;
-					break;
-				default:
-					Serial.write("expecting a command byte; ignoring received: "); Serial.println(received);
-				break;
+			state[1] = 0;
+			if (4 > (state[0] = command[0] >> 5)) {
+				Serial.write("expecting a command byte; ignoring received: "); Serial.println(received);
+				state[0] = 0;
 			}
 		}
-		else if (2 != state[0]) {
+		else if (5 != state[0]) {
 			byte limit = (4 == state[0]) ? 3 : 2;
-     unsigned int value;
+     		unsigned int value;
      
 			if (state[1] < limit) {
 				command[state[1]] = received;
@@ -126,31 +115,32 @@ void loop()
 				return;
 			}
 			if (state[1] < limit)
-				return;				// need another byte
+				return;						// need another byte
 			switch (state[0]) {
-			case 1:					// PWM percent
-				MyTim->setCaptureCompare(channel, command[2], PERCENT_COMPARE_FORMAT);
-				break;
-			case 3:
-				break;
-			case 4:				// 3-byte 16-bit command: set PWM period
-				value = 3 & command[0];
-				value <<=7;
-				value |= command[1];
-				value <<=7;
-				value |= command[2];
-				if (0 < value)
-					MyTim->setOverflow(31 * value, MICROSEC_FORMAT);
-				else Serial.write("setOverflow(0) disallowed\n");
-				break;
-			default:
-				Serial.write("Unknown state: "); Serial.print(state[0]); Serial.write("; ignoring received = ");
-				Serial.println(received);
-				break;
+				case 4:						// 7 data bits: PWM percent
+					MyTim->setCaptureCompare(channel, command[2], PERCENT_COMPARE_FORMAT);
+					break;
+				case 6:						// 12-bit 2-byte
+					Serial.write("12-bit command not yet implemented\n");
+					break;
+				case 7:						// 3-byte 16-bit command: set PWM period
+					value = 3 & command[0];
+					value <<=7;
+					value |= command[1];
+					value <<=7;
+					value |= command[2];
+					if (0 < value)
+						MyTim->setOverflow(50 * value, MICROSEC_FORMAT);	// 50 usec = 20kHz, 2,000,000 = 0.5Hz
+					else Serial.write("setOverflow(0) disallowed\n");
+					break;
+				default:
+					Serial.write("Unknown state: "); Serial.print(state[0]); Serial.write("; ignoring received = ");
+					Serial.println(received);
+					break;
 			}
 			state[0] = state[1] = 0;
 		}
-		else {	// deal with long commands
+		else {								// deal with state 5 long commands
 			if (once)
 				return;
 			Serial.write("long commands not yet implemented\n");

@@ -5,3 +5,6 @@ which does everything in setup() and nothing in loop()
 - This sketch uses interrupts to control Blue Pill's LED, which is not on a PWM pin.
  
 This sketch appears to be a path for *usable* [Blue Pill](https://blekenbleu.github.io/Arduino/) hardware PWM with e.g. [tension testing](https://github.com/blekenbleu/Direct-Drive-harness-tension-tester).
+
+8-bit protocol uses 3msb of the first byte for command type;  
+PWM wants 16 bits (command type b'111') for period and 7 bits (command type b'100') for PWM %

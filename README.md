@@ -23,4 +23,4 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [SimHubPWMfans](SimHubPWMfans/) *30 Sep 2021* index fan[] pair based on lsb of ASCII values, with 6 msb to set PWM duty cycle
 - [WiFi_blink](WiFi_blink/) *10 Jun 2021* based on *now-lost* tutorial
 
-### [discussion](https://blekenbleu.github.io/Arduino)
+### [discussion page](https://blekenbleu.github.io/Arduino)

@@ -29,6 +29,7 @@ void Compare_IT_callback(void)	// Compare match event corresponds to PWM falling
   digitalWrite(pin2, LOW);		// pin2 will approximate PWM pin
 }
 
+// AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.4.0/cores/arduino/HardwareTimer.h
 HardwareTimer *MyTim;
 uint32_t channel;
 void setup()
@@ -66,8 +67,11 @@ void setup()
 
 void Reset()
 {
+  MyTim->pause();
 	MyTim->setCaptureCompare(channel, 0, PERCENT_COMPARE_FORMAT);
-	delay(1);
+	MyTim->resume();
+  Serial.write("PWM_FullConfiguration:  PWM % = ");  Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
+  Serial.write(";  PWM usec = "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
 }
 
 /*

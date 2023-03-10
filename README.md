@@ -1,6 +1,9 @@
 ## Arduino (*mostly*) Blue Pill sketches
-As described in [**Arduino for STM32 Black 'n Blue Pills, ESP32-S[2,3]**](https://blekenbleu.github.io/Arduino/), this is my default folder for STM32 Arduino 1.18.13;  
+My STM32 Arduino 1.18.13 folder, as described in [**Arduino for STM32 Black 'n Blue Pills, ESP32-S[2,3]**](https://blekenbleu.github.io/Arduino/);  
 a separate [*portable*](https://docs.arduino.cc/software/ide-v1/tutorials/PortableIDE) Arduino 1.18.16 installation [handles ESP32](https://github.com/blekenbleu/arduino-esp32).  
+
+*Learn STM32 tech* @ [**DEEPBLUE MBEDDED Tutorials / Articles / Projects / Courses**](https://deepbluembedded.com/)   
+
 This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.1.0`
 ### here
 - [**many in libraries/**](libraries/)

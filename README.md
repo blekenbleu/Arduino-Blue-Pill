@@ -14,6 +14,7 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [BlueLUT_Servo](BlueLUT_Servo/) *24 Jun 2021* index servo[] based on 3 bits of ASCII values, with 4 lsb to index LUT
 - [BluePWMfan](BluePWMfan/) *24 Jun 2021* index fan[] based on 3 bits of ASCII values, with 4 lsb to set PWM duty cycle
 - [Blue_ASCII](Blue_ASCII/) *3 Mar 2023* sketch for STM32 Blue Pill echoes received characters with hex option.
+- [**Blue_ASCII_PWM_LED**](Blue_ASCII_PWM_LED/) *9 Mar 2023* STM32 Blue Pill sketch for debugging [Fake8](https://github.com/blekenbleu/Fake8).
 - [**Blue_ASCII_Servo**](Blue_ASCII_Servo/) *28 Feb 2023* sketch for STM32 Blue Pill moves hobby servos based on received ASCII.
 - [Blue_Blink](Blue_Blink/) *28 Jan 2021* is a trivial LED blink sketch for STM32 Blue Pill
 - [Blue_Servo](Blue_Servo/) *21 Apr 2021* is a trivial hobby servo sketch for STM32 Blue Pill

@@ -1,6 +1,8 @@
 #include <Servo.h>
-// echo Serial bytes in HEX; use PWM to control LED feedback
+// echo Serial bytes in HEX;  anticipate using PWM to control LED feedback
 // https://blekenbleu.github.io/Arduino/
+// PWM_FullConfiguration.ino borrows from this code
+// https://github.com/blekenbleu/Arduino-Blue-Pill/tree/main/PWM_FullConfiguration
 
 #define LED PC13		// Blue Pill green LED
 

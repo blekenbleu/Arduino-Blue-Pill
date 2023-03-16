@@ -1,15 +1,9 @@
-# STM32_PWM Library
+# [STM32_PWM Library](https://github.com/khoih-prog/STM32_PWM)
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/STM32_PWM.svg?)](https://www.ardu-badge.com/STM32_PWM)
 [![GitHub release](https://img.shields.io/github/release/khoih-prog/STM32_PWM.svg)](https://github.com/khoih-prog/STM32_PWM/releases)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/khoih-prog/STM32_PWM/blob/main/LICENSE)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
-[![GitHub issues](https://img.shields.io/github/issues/khoih-prog/STM32_PWM.svg)](http://github.com/khoih-prog/STM32_PWM/issues)
-
-
-
-<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
-<a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
+ *The original was archived by Khoi Hoang Feb 4, 2023.*
 
 
 ---
@@ -82,7 +76,9 @@ This library is using the **same or similar functions** as other FastPWM librari
 
 ---
 
-The most important feature is they're purely hardware-based PWM channels. Therefore, their executions are **very precise and not blocked by bad-behaving functions or tasks**. This important feature is absolutely necessary for mission-critical tasks. 
+The most important feature is they're purely hardware-based PWM channels.  
+Therefore, their executions are **very precise and not blocked by bad-behaving functions or tasks**.  
+This important feature is absolutely necessary for mission-critical tasks. 
 
 These hardware PWM channels still work even if other functions are blocking. Moreover, they are much more precise (certainly depending on clock frequency accuracy) than other ISR-based or software-based PWM using millis() or micros(). That's necessary if you need to measure some data requiring very high frequency and much better accuracy.
 
@@ -563,7 +559,8 @@ Submit issues to: [STM32_PWM issues](https://github.com/khoih-prog/STM32_PWM/iss
 
 Many thanks for everyone for bug reporting, new feature suggesting, testing and contributing to the development of this library.
 
-1. Thanks to [Paul van Dinther](https://github.com/dinther) for proposing new way to use PWM to drive Stepper-Motor in [Using PWM to step a stepper driver #16](https://github.com/khoih-prog/RP2040_PWM/issues/16), leading to v2.0.3
+1. Thanks to [Paul van Dinther](https://github.com/dinther) for proposing new way to use PWM  
+   to drive Stepper-Motor in [Using PWM to step a stepper driver #16](https://github.com/khoih-prog/RP2040_PWM/issues/16), leading to v2.0.3
 
 
 <table>
@@ -571,18 +568,6 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
     <td align="center"><a href="https://github.com/dinther"><img src="https://github.com/dinther.png" width="100px;" alt="dinther"/><br /><sub><b>Paul van Dinther</b></sub></a><br /></td>
   </tr>
 </table>
-
-
----
-
-## Contributing
-
-If you want to contribute to this project:
-
-- Report bugs and errors
-- Ask for enhancements
-- Create issues and pull requests
-- Tell other people about this library
 
 ---
 

@@ -1,13 +1,12 @@
 ## Arduino (*mostly*) Blue Pill sketches
-My STM32 Arduino 1.18.13 folder, as described in [**Arduino for STM32 Black 'n Blue Pills, ESP32-S[2,3]**](https://blekenbleu.github.io/Arduino/);  
+STM32 Arduino 1.18.13 folder, as described in [**Arduino for STM32 Black 'n Blue Pills, ESP32-S[2,3]**](https://blekenbleu.github.io/Arduino/);  
 a separate [*portable*](https://docs.arduino.cc/software/ide-v1/tutorials/PortableIDE) Arduino 1.18.16 installation [handles ESP32](https://github.com/blekenbleu/arduino-esp32).  
 
 *Learn STM32 tech* @ [**DEEPBLUE MBEDDED Tutorials / Articles / Projects / Courses**](https://deepbluembedded.com/)   
 
-This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.1.0`
-### here
-- [**many in libraries/**](libraries/)
-- [**STM32Examples**](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
+This Arduino 1.18.13 installation put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.1.0`
+### sketches here
+- [*many sketches in libraries/\*/examples/*](libraries/)
 - [BeltTensionner](BeltTensionner/) *17 May 2021* @Wotever's original SimHUb plugin sketch
 - [blek2char](blek2char/) *15 Jan 2022 update* by @sierses: real Arduino support
 - [Blue2charServo](Blue2charServo/) *6 Oct 2021* multi-character control for SimHub Custom serial devices
@@ -25,6 +24,7 @@ This Arduino put STM32 core library in `/c/Users/bleke/AppData/Local/Arduino15/p
 - [SerialEcho](SerialEcho/) *10 Jun 2021* ESP8266 D1 UNO R1 
 - [ServoBeltTensioner](ServoBeltTensioner/) *5 Jul 2021* hacked from @Wotever's BeltTensionner
 - [SimHubPWMfans](SimHubPWMfans/) *30 Sep 2021* index fan[] pair based on lsb of ASCII values, with 6 msb to set PWM duty cycle
+- [**STM32Examples**](STM32Examples/) from [stm32duino/STM32Examples](https://github.com/stm32duino/STM32Examples)
 - [WiFi_blink](WiFi_blink/) *10 Jun 2021* based on *now-lost* tutorial
 
-### [discussion page](https://blekenbleu.github.io/Arduino)
+### [Arduino STM32/ESP32 discussion page](https://blekenbleu.github.io/Arduino)

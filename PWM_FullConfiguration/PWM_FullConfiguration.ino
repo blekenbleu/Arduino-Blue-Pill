@@ -37,15 +37,15 @@ void Reset(byte percent)
 	MyTim->setCaptureCompare(channel, percent, PERCENT_COMPARE_FORMAT);
 	MyTim->refresh();
 	MyTim->resume();
-	Serial.write("PWM_FullConfiguration reset:  PWM % = ");
-	Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
-	Serial.write(";  PWM period usec = "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
-	Serial.write("\nPrescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
+	Serial.write("\nPWM_FullConfiguration reset:  PWM channel "); Serial.print(channel);
+	Serial.write(" "); Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
+	Serial.write("% @ "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
+	Serial.write("usec period;  Prescalefactor = "); Serial.println(MyTim->getPrescaleFactor());
 }
 
 void setup()
 {
-	// LED pin2 is not controllable by HardwareTimer
+	// Blue Pill LED pin2 is not controllable by HardwareTimer
 	pinMode(pin2, OUTPUT);
 
 	// Initialize serial and wait for port to open:
@@ -95,7 +95,7 @@ void loop()
 		received = Serial.read();
 		Serial.print(received, HEX);
 		if (0xBF == received) {
-			Reset(0);
+			Reset(1);
 			state[0] = state[1] = 0;
 		}
 		else if (0 == state[0] || 0x80 & received) {	// not processing a command or start of one?

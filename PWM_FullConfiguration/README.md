@@ -1,12 +1,13 @@
-*evolved from*:  
-## [PWM_FullConfiguration](https://github.com/stm32duino/STM32Examples/tree/main/examples/Peripherals/HardwareTimer/PWM_FullConfiguration)
+*evolved from*:&nbsp; <font size=+2><b> 
+[PWM_FullConfiguration](https://github.com/stm32duino/STM32Examples/tree/main/examples/Peripherals/HardwareTimer/PWM_FullConfiguration)  </b></font>  
+
 STM is IMO **unjustifiably** proud of [their PWM implementation](https://github.com/stm32duino/STM32Examples/tree/main/examples/Peripherals/HardwareTimer/All-in-one_setPWM)
 which does everything in setup() and nothing in loop()
 - What good is a PWM that cannot be changed?
 - This sketch controls Blue Pill's LED, which is NOT on a PWM pin, by PWM hardware timer interrupt handlers.
 - [This web page](https://forum.arduino.cc/t/how-to-change-arduino-stm32-pwm-frequency-to-20khz-in-arduino-ide/675557) describes Arduino command sequence to change STM32 PWM frequency.   
  
-This sketch is a path to *usable* [Blue Pill](https://blekenbleu.github.io/Arduino/) hardware PWM for e.g. [tension testing](https://github.com/blekenbleu/Direct-Drive-harness-tension-tester) or.
+This sketch is a path to *usable* [Blue Pill](https://blekenbleu.github.io/Arduino/) hardware PWM for e.g. [tension testing](https://github.com/blekenbleu/Direct-Drive-harness-tension-tester) or
 <a href="https://github.com/blekenbleu/Arduino-Blue-Pill/blob/main/SimHubPWMfans/">fans</a>.
 
 [Fake8](https://github.com/blekenbleu/Fake8) employs an [8-bit multi-byte protocol](https://github.com/blekenbleu/Arduino-Blue-Pill/blob/main/8-bit.md), with 3msb of the first byte for command type;  

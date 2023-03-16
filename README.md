@@ -17,7 +17,6 @@ This Arduino 1.18.13 installation put STM32 core library in `/c/Users/bleke/AppD
 - [**Blue_ASCII_Servo**](Blue_ASCII_Servo/) *28 Feb 2023* sketch for STM32 Blue Pill moves hobby servos based on received ASCII.
 - [Blue_Blink](Blue_Blink/) *28 Jan 2021* is a trivial LED blink sketch for STM32 Blue Pill
 - [Blue_Servo](Blue_Servo/) *21 Apr 2021* is a trivial hobby servo sketch for STM32 Blue Pill
-- [Board_Identify](Board_Identify/) *10 Jun 2021* Identify microcontroller for which code is built
 - [Joystick](Joystick/) *3 Jan 2019* axes and buttons over serial ibus
 - [new2char](new2char/) *28 Oct 2021* 7-bit, first with sync msb;  12 available bits: 5 address + 7 data
 - [**PWM_FullConfiguration**](PWM_FullConfiguration) *8 Mar 2023* from [`STM32Examples/examples/Peripherals/HardwareTimer`](STM32Examples/examples/Peripherals/HardwareTimer/)  

@@ -9,13 +9,12 @@ For information on installing libraries, see: http://www.arduino.cc/en/Guide/Lib
 - [SimpleTimer](SimpleTimer-master/)
 - [STM32_PWM](STM32_PWM/)
 
-STM officially supports [STM32duino](https://github.com/stm32duino) with [core support](https://github.com/stm32duino/Arduino_Core_STM32)
-and [**examples**](STM32Examples-main),  
-including [All-in-one_setPWM](STM32Examples-main/examples/Peripherals/HardwareTimer/All-in-one_setPWM)
-and [PWM_FullConfiguration](STM32Examples-main/examples/Peripherals/HardwareTimer/PWM_FullConfiguration).  
+STM supports [STM32duino](https://github.com/stm32duino) with [core support](https://github.com/stm32duino/Arduino_Core_STM32)
+and [**examples**](STM32Examples-main),
+including [PWM_FullConfiguration](STM32Examples-main/examples/Peripherals/HardwareTimer/PWM_FullConfiguration).  
 
-Arduino comes with many libraries, many seemingly AVR-specific, but here are some others:  
-**in the Arduino installation folder**:
+Arduino comes with many libraries, many seemingly AVR-specific,  
+but there are others **in the Arduino installation folder**:
 ```
 libraries/Adafruit_Circuit_Playground/
 libraries/Bridge/

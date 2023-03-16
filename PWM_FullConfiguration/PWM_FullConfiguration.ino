@@ -20,17 +20,29 @@
 
 void Update_IT_callback(void)	// Update event at PWM rising edge in PWM1 mode
 {
-  digitalWrite(pin2, HIGH);
+  digitalWrite(pin2, LOW);		// pin2 will approximate PWM pin
 }
 
 void Compare_IT_callback(void)	// Compare match event corresponds to PWM falling edge in PWM1 mode
 {
-  digitalWrite(pin2, LOW);		// pin2 will approximate PWM pin
+  digitalWrite(pin2, HIGH);
 }
 
 // AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.4.0/cores/arduino/HardwareTimer.h
 HardwareTimer *MyTim;
 uint32_t channel;
+void Reset(byte percent)
+{
+	MyTim->pause();
+	MyTim->setCaptureCompare(channel, percent, PERCENT_COMPARE_FORMAT);
+	MyTim->refresh();
+	MyTim->resume();
+	Serial.write("PWM_FullConfiguration reset:  PWM % = ");
+	Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
+	Serial.write(";  PWM period usec = "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
+	Serial.write("\nPrescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
+}
+
 void setup()
 {
 	// LED pin2 is not controllable by HardwareTimer
@@ -57,20 +69,9 @@ void setup()
 	// setOverflow() with MICROSEC_FORMAT or HERTZ_FORMAT computes Prescalerfactor based on getTimerClkFreq()
 	// setOverflow() takes uint32_t;  fractional Hz by large MICROSEC_FORMAT;  50 usec = 20kHz
 	MyTim->setOverflow(2000000, MICROSEC_FORMAT); // 2000000 microseconds = 2000 milliseconds
-	MyTim->setCaptureCompare(channel, 50, PERCENT_COMPARE_FORMAT); // 50%
 	MyTim->attachInterrupt(Update_IT_callback);
 	MyTim->attachInterrupt(channel, Compare_IT_callback);
-	MyTim->resume();
-	Serial.write("\nleaving setup()... Prescalerfactor = "); Serial.println(MyTim->getPrescaleFactor());
-}
-
-void Reset()
-{
-	MyTim->pause();
-	MyTim->setCaptureCompare(channel, 0, PERCENT_COMPARE_FORMAT);
-	MyTim->resume();
-	Serial.write("PWM_FullConfiguration reset:  PWM % = ");  Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
-	Serial.write(";  PWM period usec = "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
+	Reset(50);
 }
 
 /*
@@ -94,16 +95,16 @@ void loop()
 		received = Serial.read();
 		Serial.print(received, HEX);
 		if (0xBF == received) {
-			Reset();
+			Reset(0);
 			state[0] = state[1] = 0;
 		}
 		else if (0 == state[0] || 0x80 & received) {	// not processing a command or start of one?
 			command[0] = received;
-			state[1] = 0;
 			if (4 > (state[0] = command[0] >> 5)) {
 				Serial.write(" expecting a command byte; ignoring received: "); Serial.println(received);
 				state[0] = 0;
 			}
+			else state[1] = 1;
 			delay(1);	// increase time for all bytes in this command to get processed in this while{}
 		}
 		else if (5 == state[0]) {							// to do: deal with state 5 multi-byte strings
@@ -114,17 +115,21 @@ void loop()
 			return;
 		}
 		else {
-			byte limit = (4 == state[0]) ? 3 : 2;
+			byte limit = (7 == state[0]) ? 3 : 2;
      		unsigned int value;
      
 			if (state[1] < limit) {
 				command[state[1]] = received;		// accumulated multi-byte commands
 				state[1]++;
 			}
-			else {								// limit == state[1]
+			if (state[1] == limit) {								// limit == state[1]
 				switch (state[0]) {
 					case 4:						// 7 data bits: PWM percent
-						MyTim->setCaptureCompare(channel, command[2], PERCENT_COMPARE_FORMAT);
+						MyTim->pause();
+						MyTim->setCaptureCompare(channel, command[1], PERCENT_COMPARE_FORMAT);
+						MyTim->refresh();
+						MyTim->resume();
+//						Serial.write(" PWM % = "); Serial.print(command[1]);
 						break;
 					case 6:						// 12-bit 2-byte
 						Serial.write(" 12-bit command not yet implemented\n");
@@ -135,8 +140,13 @@ void loop()
 						value |= command[1];
 						value <<=7;
 						value |= command[2];
-						if (0 < value)
+						if (0 < value) {
+							MyTim->pause();
 							MyTim->setOverflow(50 * value, MICROSEC_FORMAT);	// 50 usec = 20kHz, 2,000,000 = 0.5Hz
+							MyTim->refresh();
+							MyTim->resume();
+//							Serial.write(" PWM period usec = "); Serial.print(50 * value);
+						}
 						else Serial.write(" setOverflow(0) disallowed\n");
 						break;
 					default:

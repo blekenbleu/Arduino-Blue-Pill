@@ -1,5 +1,6 @@
 ### 8-bit USB serial protocol for Arduino, with apologies to [MIDI](https://blekenbleu.github.io/MIDI/)
 as used in [**Fake8** SimHub plugin](https://github.com/blekenbleu/Fake8)
+and [PWM_FullConfiguration](https://github.com/blekenbleu/Arduino-Blue-Pill/tree/main/PWM_FullConfiguration) Arduino sketch
 for e.g. [PWM tension testing](https://github.com/blekenbleu/Direct-Drive-harness-tension-tester)  
 ```
 /*

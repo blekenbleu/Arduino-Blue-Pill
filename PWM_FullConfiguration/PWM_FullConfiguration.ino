@@ -31,16 +31,17 @@ void Compare_IT_callback(void)	// Compare match event corresponds to PWM falling
 // AppData/Local/Arduino15/packages/STMicroelectronics/hardware/stm32/2.4.0/cores/arduino/HardwareTimer.h
 HardwareTimer *MyTim;
 uint32_t channel;
+uint8_t verbosity = 1;		// 0 = silent; 1 == hex; 2 == decimal;
 void Reset(byte percent)
 {
 	MyTim->pause();
 	MyTim->setCaptureCompare(channel, percent, PERCENT_COMPARE_FORMAT);
 	MyTim->refresh();
 	MyTim->resume();
-	Serial.write("\nPWM_FullConfiguration reset:  PWM channel "); Serial.print(channel);
+	Serial.write("\n# PWM_FullConfiguration reset:  PWM channel "); Serial.print(channel);
 	Serial.write(" "); Serial.print(MyTim->getCaptureCompare(channel, PERCENT_COMPARE_FORMAT));
-	Serial.write("% @ "); Serial.println(MyTim->getOverflow(MICROSEC_FORMAT));
-	Serial.write("usec period;  Prescalefactor = "); Serial.println(MyTim->getPrescaleFactor());
+	Serial.write("% @ "); Serial.print(MyTim->getOverflow(MICROSEC_FORMAT));
+	Serial.write(" usec period;\n#  Prescalefactor = "); Serial.println(MyTim->getPrescaleFactor());
 }
 
 void setup()
@@ -64,14 +65,14 @@ void setup()
 	// Instantiate HardwareTimer object;  'new' HardwareTimer MyTim is not destroyed when setup() ends.
 	MyTim = new HardwareTimer(Instance);
 	MyTim->setMode(channel, TIMER_OUTPUT_COMPARE_PWM1, pin);
-	Serial.write("new HardwareTimer() TIMER_OUTPUT_COMPARE_PWM1 mode set");
+	Serial.write("new HardwareTimer() TIMER_OUTPUT_COMPARE_PWM1 mode set\n");
 
 	// setOverflow() with MICROSEC_FORMAT or HERTZ_FORMAT computes Prescalerfactor based on getTimerClkFreq()
 	// setOverflow() takes uint32_t;  fractional Hz by large MICROSEC_FORMAT;  50 usec = 20kHz
 	MyTim->setOverflow(2000000, MICROSEC_FORMAT); // 2000000 microseconds = 2000 milliseconds
 	MyTim->attachInterrupt(Update_IT_callback);
 	MyTim->attachInterrupt(channel, Compare_IT_callback);
-	Reset(50);
+	Reset(1);
 }
 
 /*
@@ -93,7 +94,8 @@ void loop()
 
 	while (0 < Serial.available()) {
 		received = Serial.read();
-		Serial.print(received, HEX);
+		if (1 == verbosity)
+			Serial.print(received, HEX);
 		if (0xBF == received) {
 			Reset(1);
 			state[0] = state[1] = 0;
@@ -101,7 +103,7 @@ void loop()
 		else if (0 == state[0] || 0x80 & received) {	// not processing a command or start of one?
 			command[0] = received;
 			if (4 > (state[0] = command[0] >> 5)) {
-				Serial.write(" expecting a command byte; ignoring received: "); Serial.println(received);
+				Serial.write("# expecting a command byte; ignoring received: "); Serial.println(received);
 				state[0] = 0;
 			}
 			else state[1] = 1;
@@ -110,7 +112,7 @@ void loop()
 		else if (5 == state[0]) {							// to do: deal with state 5 multi-byte strings
 			state[0] = state[1] = 0;
 			if (0 == once)
-				Serial.write(" long commands not yet implemented\n");
+				Serial.write("# long commands not yet implemented\n");
 			once++;
 			return;
 		}
@@ -125,14 +127,20 @@ void loop()
 			if (state[1] == limit) {								// limit == state[1]
 				switch (state[0]) {
 					case 4:						// 7 data bits: PWM percent
+						if (1 == (31 & command[0])) {
+							verbosity = command[1];
+							break;
+						}
+						if (2 == verbosity)
+							Serial.println(command[1]);
 						MyTim->pause();
 						MyTim->setCaptureCompare(channel, command[1], PERCENT_COMPARE_FORMAT);
 						MyTim->refresh();
 						MyTim->resume();
-//						Serial.write(" PWM % = "); Serial.print(command[1]);
+//						Serial.write("# PWM % = "); Serial.print(command[1]);
 						break;
 					case 6:						// 12-bit 2-byte
-						Serial.write(" 12-bit command not yet implemented\n");
+						Serial.write("# 12-bit command not yet implemented\n");
 						break;
 					case 7:						// 3-byte 16-bit command: set PWM period
 						value = 3 & command[0];
@@ -145,12 +153,13 @@ void loop()
 							MyTim->setOverflow(50 * value, MICROSEC_FORMAT);	// 50 usec = 20kHz, 2,000,000 = 0.5Hz
 							MyTim->refresh();
 							MyTim->resume();
-//							Serial.write(" PWM period usec = "); Serial.print(50 * value);
+							if (2 == verbosity)
+								Serial.write("# PWM period usec = "); Serial.print(50 * value);
 						}
-						else Serial.write(" setOverflow(0) disallowed\n");
+						else Serial.write("# setOverflow(0) disallowed\n");
 						break;
 					default:
-						Serial.write(" Unsupported state: "); Serial.print(state[0]); Serial.write("; ignoring received = ");
+						Serial.write("# Unsupported state: "); Serial.print(state[0]); Serial.write("; ignoring received = ");
 						Serial.println(received);
 				}
 				state[0] = state[1] = 0;

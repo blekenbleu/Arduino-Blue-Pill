@@ -154,7 +154,7 @@ void loop()
 							MyTim->refresh();
 							MyTim->resume();
 							if (2 == verbosity)
-								Serial.write("# PWM period usec = "); Serial.print(50 * value);
+								Serial.write("# PWM period usec = "); Serial.println(50 * value);
 						}
 						else Serial.write("# setOverflow(0) disallowed\n");
 						break;

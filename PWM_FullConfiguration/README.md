@@ -1,6 +1,9 @@
 *evolved from*:&nbsp; <font size=+2><b> 
 [PWM_FullConfiguration](https://github.com/stm32duino/STM32Examples/tree/main/examples/Peripherals/HardwareTimer/PWM_FullConfiguration)  </b></font>  
 
+*evolved to*:&nbsp; <font size=+2><b> 
+[Direct Drive harness tensioner](https://github.com/blekenbleu/Direct-Drive-harness-tension-tester) and [SimHubPWMfans](https://github.com/blekenbleu/Arduino-Blue-Pill/tree/main/SimHubPWMfans) </b></font>  
+
 STM is IMO **unjustifiably** proud of [their PWM implementation](https://github.com/stm32duino/STM32Examples/tree/main/examples/Peripherals/HardwareTimer/All-in-one_setPWM)
 which does everything in setup() and nothing in loop()
 - What good is a PWM that cannot be changed?

@@ -1,7 +1,7 @@
 ## about Blue ASCII Servo
 *23 Feb 2023:*&nbsp;  `#define UNO` *added to [Blue_ASCII_Servo.ino](Blue_ASCII_Servo.ino)*
 
-[Stuyo's sim belt servo tensioner](https://diy-sim.com/guides/how-tos/servo-belt-tensioner-diy) is based on this Arduino sketch.  
+Stuyo's sim belt servo tensioner was based on this Arduino sketch.  
 
 It requires a *compatible* [SimHub Custom Serial profile](https://blekenbleu.github.io/Arduino/SimHubCustomSerial) (see [**Update**](#update) below),  
 or e.g. from [SimHub Custom serial profile atlas](https://blekenbleu.github.io/Arduino/shsds.htm),  
@@ -50,4 +50,4 @@ Wide bed casters work fine as pulleys for 2-inch shoulder straps:
 
 ### Alternative:&nbsp; recommended for more than 2 servos, [blek2char](../blek2char)
 
-Other alternatives:&nbsp; [SimHub Custom serial profile atlas](../shsds.htm)
+Other alternatives:&nbsp; [SimHub Custom serial profile atlas](https://blekenbleu.github.io/Arduino/shsds.htm)

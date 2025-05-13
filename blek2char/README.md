@@ -1,3 +1,5 @@
+---
+---
 ## multi-character control for SimHub Custom serial devices
 
 .. as advertized on [RaceDepartment](https://www.racedepartment.com/threads/multi-character-control-for-simhub-custom-serial-devices.208661/)
@@ -16,6 +18,12 @@ Edit near the top of [blek2char.ino](blek2char.ino) to select the appropriate ta
 //#define PROMICRO 1 // Sparkfun ProMicro
 //#define MEGA 1 // Arduino Mega 2560 
 ```
+- Arduino sketch:&nbsp; [blek2char.ino](blek2char.ino)
+- Custom serial device profile:&nbsp; [blek2char.shsds](https://github.com/blekenbleu/SimHub-Profiles/blob/main/blek2char.shsds)
 
-![](page1.gif)  
-![](page2.gif)  
+- ShakeIt telemetry profile:&nbsp; [blek2char.siprofile](https://github.com/blekenbleu/SimHub-Profiles/blob/main/blek2char.siprofile)
+	- Custom serial device profile for use with ShakeIt telemetry profile:&nbsp; [new2char.shsds](https://github.com/blekenbleu/SimHub-Profiles/blob/main/new2char.shsds)
+		- [JavaScript](new2char.js) in new2char.shsds
+
+![](Page1.gif)  
+![](Page2.gif)  

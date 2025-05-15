@@ -1,7 +1,7 @@
 ## about Blue ASCII Servo
 *23 Feb 2023:*&nbsp;  `#define UNO` *added to [Blue_ASCII_Servo.ino](Blue_ASCII_Servo.ino)*
 
-Stuyo's sim belt servo tensioner was based on this Arduino sketch.  
+[Stuyo's](https://github.com/StuyoP/Belt-Tensioner-Robot-Servo/blob/main/Blue_ASCII_Servo.ino) sim belt servo tensioner was based on this Arduino sketch.  
 
 It requires a *compatible* [SimHub Custom Serial profile](https://blekenbleu.github.io/Arduino/SimHubCustomSerial) (see [**Update**](#update) below),  
 or e.g. from [SimHub Custom serial profile atlas](https://blekenbleu.github.io/Arduino/shsds.htm),  
